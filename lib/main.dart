@@ -22,14 +22,16 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       title: 'Todo App',
       theme: ThemeData(
+        useMaterial3: false,
         colorScheme: const ColorScheme.light(
-            background: Colors.white,
-            onBackground: Colors.black,
-            primary: Colors.deepPurple,
-            onPrimary: Colors.black,
-            secondary: Colors.lightGreen,
+            background: Colors.white12,
+            onBackground: Colors.white,
+            primary: Color(0xff4169e1),
+            onPrimary: Colors.white,
+            secondary: Colors.blueAccent,
             onSecondary: Colors.white
         ),
       ),

@@ -127,11 +127,12 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Text(
             'My ToDo App',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style:
+                TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
           ),
         ),
         body: Padding(
@@ -143,7 +144,9 @@ class _HomeViewState extends State<HomeView> {
                     itemCount: state.todos.length,
                     itemBuilder: (context, int i) {
                       return Card(
-                        color: Theme.of(context).colorScheme.primary,
+                        color: state.todos[i].isComplete
+                            ? Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.primary,
                         elevation: 1,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
@@ -164,8 +167,18 @@ class _HomeViewState extends State<HomeView> {
                               ],
                             ),
                             child: ListTile(
-                                title: Text(state.todos[i].title),
-                                subtitle: Text(state.todos[i].description),
+                                title: Text(
+                                  state.todos[i].title,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(
+                                  state.todos[i].description,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal),
+                                ),
                                 trailing: Checkbox(
                                     value: state.todos[i].isComplete,
                                     activeColor:
