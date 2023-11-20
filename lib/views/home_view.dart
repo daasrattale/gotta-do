@@ -130,7 +130,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Text(
-            'My ToDo App',
+            'GottaDo',
             style:
                 TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
           ),

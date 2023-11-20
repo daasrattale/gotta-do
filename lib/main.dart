@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      title: 'Todo App',
+      title: 'GottaDo',
       theme: ThemeData(
         useMaterial3: false,
         colorScheme: const ColorScheme.light(
