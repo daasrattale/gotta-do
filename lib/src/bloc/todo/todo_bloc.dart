@@ -15,95 +15,52 @@ class TodoBloc extends HydratedBloc<TodoEvent, TodoState> {
   }
 
   void _onStarted(
-      TodoStarted event,
-      Emitter<TodoState> emit,
-      ) {
-    if(state.status == TodoStatus.success) return;
-    emit(
-        state.copyWith(
-            todos: state.todos,
-            status: TodoStatus.success
-        )
-    );
+    TodoStarted event,
+    Emitter<TodoState> emit,
+  ) {
+    if (state.status == TodoStatus.success) return;
+    emit(state.copyWith(todos: state.todos, status: TodoStatus.success));
   }
 
   void _onAddTodo(
-      AddTodo event,
-      Emitter<TodoState> emit,
-      ) {
-    emit(
-        state.copyWith(
-            status: TodoStatus.loading
-        )
-    );
+    AddTodo event,
+    Emitter<TodoState> emit,
+  ) {
+    emit(state.copyWith(status: TodoStatus.loading));
     try {
       List<Todo> temp = [];
       temp.addAll(state.todos);
       temp.insert(0, event.todo);
-      emit(
-          state.copyWith(
-              todos: temp,
-              status: TodoStatus.success
-          )
-      );
+      emit(state.copyWith(todos: temp, status: TodoStatus.success));
     } catch (e) {
-      emit(
-          state.copyWith(
-              status: TodoStatus.error
-          )
-      );
+      emit(state.copyWith(status: TodoStatus.error));
     }
   }
 
   void _onRemoveTodo(
-      RemoveTodo event,
-      Emitter<TodoState> emit,
-      ) {
-    emit(
-        state.copyWith(
-            status: TodoStatus.loading
-        )
-    );
+    RemoveTodo event,
+    Emitter<TodoState> emit,
+  ) {
+    emit(state.copyWith(status: TodoStatus.loading));
     try {
       state.todos.remove(event.todo);
-      emit(
-          state.copyWith(
-              todos: state.todos,
-              status: TodoStatus.success
-          )
-      );
+      emit(state.copyWith(todos: state.todos, status: TodoStatus.success));
     } catch (e) {
-      emit(
-          state.copyWith(
-              status: TodoStatus.error
-          )
-      );
+      emit(state.copyWith(status: TodoStatus.error));
     }
   }
 
   void _onAlterTodo(
-      AlterTodo event,
-      Emitter<TodoState> emit,
-      ) {
-    emit(
-        state.copyWith(
-            status: TodoStatus.loading
-        )
-    );
+    AlterTodo event,
+    Emitter<TodoState> emit,
+  ) {
+    emit(state.copyWith(status: TodoStatus.loading));
     try {
-      state.todos[event.index].isComplete = !state.todos[event.index].isComplete;
-      emit(
-          state.copyWith(
-              todos: state.todos,
-              status: TodoStatus.success
-          )
-      );
+      state.todos[event.index].isComplete =
+          !state.todos[event.index].isComplete;
+      emit(state.copyWith(todos: state.todos, status: TodoStatus.success));
     } catch (e) {
-      emit(
-          state.copyWith(
-              status: TodoStatus.error
-          )
-      );
+      emit(state.copyWith(status: TodoStatus.error));
     }
   }
 

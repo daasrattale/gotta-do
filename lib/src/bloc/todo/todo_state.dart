@@ -24,26 +24,21 @@ class TodoState extends Equatable {
   @override
   factory TodoState.fromJson(Map<String, dynamic> json) {
     try {
-      var listOfTodos = (json['todo'] as List<dynamic>)
+      var listOfTodos = (json['todos'] as List<dynamic>)
           .map((e) => Todo.fromJson(e as Map<String, dynamic>))
           .toList();
 
       return TodoState(
           todos: listOfTodos,
           status: TodoStatus.values.firstWhere(
-                  (element) => element.name.toString() == json['status']
-          )
-      );
+              (element) => element.name.toString() == json['status']));
     } catch (e) {
       rethrow;
     }
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'todo': todos,
-      'status': status.name
-    };
+    return {'todos': todos, 'status': status.name};
   }
 
   @override

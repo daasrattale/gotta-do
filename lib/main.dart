@@ -22,7 +22,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: 'GottaDo',
       theme: ThemeData(
         useMaterial3: false,

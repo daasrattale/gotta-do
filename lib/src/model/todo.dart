@@ -33,8 +33,8 @@ class Todo{
   Map<String, dynamic> toJson() {
     return {
       'title': title,
-      'subtitle': description,
-      'isDone': isComplete
+      'description': description,
+      'isComplete': isComplete
     };
   }
 
@@ -42,8 +42,8 @@ class Todo{
   String toString() {
     return '''Todo: {
 			title: $title\n
-			subtitle: $description\n
-			isDone: $isComplete\n
+			description: $description\n
+			isComplete: $isComplete\n
 		}''';
   }
 }
