@@ -43,79 +43,74 @@ class _HomeViewState extends State<HomeView> {
                   TextEditingController controller2 = TextEditingController();
 
                   return AlertDialog(
-                    title: const Text('Add a Task'),
+                    title: const Text('Add a new Task'),
+                    actionsPadding: const EdgeInsets.all(20.0),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextField(
-                          controller: controller1,
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          decoration: InputDecoration(
-                            hintText: 'Task Title...',
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.secondary,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: TextField(
+                            controller: controller1,
+                            autocorrect: true,
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            decoration: const InputDecoration(
+                              hintText: 'Task Title',
+                              enabledBorder:  UnderlineInputBorder(
+                                borderSide: BorderSide(width: 1, color: Colors.grey),
                               ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.grey),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        TextField(
-                          controller: controller2,
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          decoration: InputDecoration(
-                            hintText: 'Task Description...',
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: Theme.of(context).colorScheme.secondary,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: TextField(
+                            maxLines: null,
+                            keyboardType: TextInputType.multiline,
+                            autocorrect: true,
+                            controller: controller2,
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            decoration: const InputDecoration(
+                              hintText: 'Task Description',
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(width: 1, color: Colors.grey),
                               ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.grey),
                             ),
                           ),
                         ),
                       ],
                     ),
                     actions: [
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: TextButton(
-                            onPressed: () {
-                              addTodo(
-                                Todo(
-                                    title: controller1.text,
-                                    description: controller2.text),
-                              );
-                              controller1.text = '';
-                              controller2.text = '';
-                              Navigator.pop(context);
-                            },
-                            style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
+                      TextButton(
+                          onPressed: () {
+                            addTodo(
+                              Todo(title: controller1.text, description: controller2.text),
+                            );
+                            controller1.text = '';
+                            controller2.text = '';
+                            Navigator.pop(context);
+                          },
+                          style: TextButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.secondary,
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: const Icon(
-                                  CupertinoIcons.check_mark,
-                                  color: Colors.green,
-                                ))),
-                      )
+                            foregroundColor: Theme.of(context).colorScheme.secondary,
+                          ),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.plus,
+                                    size: 16,
+                                  ),
+                                  Text("New task")
+                                ],
+                              )))
                     ],
                   );
                 });
@@ -126,15 +121,7 @@ class _HomeViewState extends State<HomeView> {
             color: Colors.black,
           ),
         ),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: const Text(
-            'GottaDo',
-            style:
-                TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
-          ),
-        ),
+        appBar: appBar(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocBuilder<TodoBloc, TodoState>(
@@ -197,4 +184,16 @@ class _HomeViewState extends State<HomeView> {
           ),
         ));
   }
+
+  AppBar appBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const Text(
+        'GottaDo',
+        style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
 }
